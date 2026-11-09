@@ -104,13 +104,10 @@ Aplikasi dapat diakses melalui browser pada: [`http://localhost:8000`](http://lo
 
 ---
 
----
-
 ## 👥 Tim Pengembang
 
-- Mahasiswa Universitas Brawijaya
-  - Kusindra Aji Rabbany (255150701111012)
-  - Rouf Daniswara - (255150700111013)
+- Kusindra Aji Rabbany (255150701111012)
+- Rouf Daniswara - (255150700111013)
 
 ---
 
