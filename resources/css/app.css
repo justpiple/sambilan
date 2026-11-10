@@ -15,7 +15,17 @@
     --color-surface-hover: #f5f5f4;
     --color-border-subtle: #e7e5e4;
 
-    /* Brand Primary (Warm Persimmon & Obsidian Anchor) */
+    /* Warm Persimmon Tokens */
+    --color-persimmon: #c2410c;
+    --color-persimmon-vibrant: #ea580c;
+    --color-persimmon-tint: #fff7ed;
+
+    /* Obsidian Ink Tokens */
+    --color-obsidian: #0f172a;
+    --color-obsidian-soft: #1e293b;
+    --color-obsidian-muted: #334155;
+
+    /* Semantic Aliases */
     --color-brand: #c2410c;
     --color-brand-vibrant: #ea580c;
     --color-brand-tint: #fff7ed;
@@ -32,6 +42,27 @@
     --radius-lg: 12px;
     --radius-xl: 16px;
     --radius-2xl: 20px;
+}
+
+/* Custom Utilities for Tactile Feedback and Ergonomics */
+@utility btn-tactile {
+    transition: transform 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out;
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+@utility touch-target {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+@utility focus-ring {
+    outline: none;
+    &:focus-visible {
+        outline: 2px solid var(--color-persimmon, #c2410c);
+        outline-offset: 2px;
+    }
 }
 
 /* Base Accessibility & Touch Targets */
