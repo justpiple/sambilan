@@ -42,8 +42,7 @@ RUN mkdir -p \
     storage/logs \
     bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache \
-    && chown -R www-data:www-data storage bootstrap/cache \
-    && docker-php-serversideup-set-file-permissions
+    && chown -R www-data:www-data storage bootstrap/cache
 
 USER www-data
 
