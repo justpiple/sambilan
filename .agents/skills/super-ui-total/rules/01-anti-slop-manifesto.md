@@ -1,104 +1,76 @@
-# Rule 01: The Anti-Slop Manifesto & Deterministic Detector
+# Rule 01: The Anti-Slop Manifesto (UI & Visual Filter)
 
-Synthesized from **Anthropic Frontend Design**, **Paul Bakaus's Impeccable**, and **Julien Thibeaut's Baseline UI**.
+Diadaptasi langsung dari framework **`antislop:antislop-ui`** dan dikombinasikan dengan prinsip **Paul Bakaus's Impeccable** serta **Anthropic Frontend Design**.
 
-LLMs suffer from *distributional convergence*—gravitating toward the safe, bland mathematical average of web training data. This document outlines the **12 Cardinal Sins of AI-Generated UI** and provides deterministic rules to catch and destroy them.
-
----
-
-## The 12 Cardinal AI-Slop Sins
-
-### 1. The Purple/Indigo Gradient Cliché
-* **The Sin:** Spreading `bg-gradient-to-r from-purple-600 to-indigo-600` or blurry radial purple blobs behind hero sections to simulate "modern AI innovation".
-* **The Fix:** Use intentional monochrome, rich deep slate/zinc tones, or project-specific brand hues. If using a gradient, make it subtle (e.g. `bg-gradient-to-b from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-950`) or use structured geometric boundaries.
-
-### 2. The Inter/Roboto Monoculture
-* **The Sin:** Defaulting to generic unstyled system sans fonts for everything, resulting in sterile templates with zero brand personality.
-* **The Fix:** Pair deliberate typography: a distinct display font (e.g. bold condensed grotesque, warm editorial serif, or technical geometric sans) with a high-legibility workhorse body font. Tune letter-spacing: `tracking-tight` on large display headings, `tracking-normal` on body copy, `tracking-wider uppercase` on small sub-labels.
-
-### 3. The Low-Contrast "Design Ghost"
-* **The Sin:** Light gray text like `text-gray-400` on white backgrounds or `text-zinc-600` on dark backgrounds. It looks "sleek" in Figma but is completely unreadable in real lighting.
-* **The Fix:** Strict WCAG AA compliance ($\ge 4.5:1$ for body text, $\ge 3:1$ for large headings).
-  - Primary text: `text-neutral-900 dark:text-neutral-100`
-  - Secondary text: `text-neutral-600 dark:text-neutral-400`
-  - Muted captions: minimum `text-neutral-500 dark:text-neutral-500` only on high-contrast surfaces.
-
-### 4. Cards-Within-Cards Inception
-* **The Sin:** Stacking container cards inside other cards, each with identical borders, radius, and padding (`p-6 bg-white border rounded-xl` inside another `p-6 bg-white border rounded-xl`).
-* **The Fix:** Vary depth and hierarchy. Use background surface shifts (e.g. canvas background `bg-neutral-50` with elevated card `bg-white dark:bg-neutral-900`), borderless groups, subtle divider lines, or whitespace separation instead of endless boxed containers.
-
-### 5. The Floating Cloud Shadow
-* **The Sin:** Slapping `shadow-2xl` or `shadow-xl` with high blur radius on flat cards with no border, making components look like detached, muddy clouds floating in mid-air.
-* **The Fix:** Layered elevation:
-  ```html
-  <!-- Crisp, modern high-craft surface -->
-  <div class="border border-neutral-200/80 bg-white shadow-xs dark:border-white/10 dark:bg-neutral-900 dark:shadow-none">
-  ```
-  Combine a crisp 1px semi-transparent border with micro-elevation (`shadow-xs` or `shadow-sm`).
-
-### 6. The Bubbly Corner Infection
-* **The Sin:** Throwing `rounded-3xl` or `rounded-full` onto square data containers, tables, or complex dashboards just to make them feel "friendly".
-* **The Fix:** Establish a strict radius hierarchy:
-  - Small chips / badges / pills: `rounded-full` or `rounded-md`
-  - Buttons & Inputs: `rounded-lg` (6–8px)
-  - Cards & Containers: `rounded-xl` (12–16px)
-  - Modals / Sheets: `rounded-2xl` (16–24px)
-  *Always ensure nested child radiuses are proportionally smaller than parent radiuses.*
-
-### 7. The Cookie-Cutter 3-Column Feature Grid
-* **The Sin:** Three identical cards in a row, each topped by an arbitrary pastel circle containing a random Lucide icon, followed by an obvious title and two lines of filler text.
-* **The Fix:** Asymmetric, editorial, or interactive layouts. Group related features with varied column spans (`col-span-2` vs `col-span-1`), showcase real interactive preview widgets, or use a Bento grid with distinct visual hierarchy.
-
-### 8. Stateless "Dead" Elements
-* **The Sin:** Buttons, links, and cards that look identical whether hovered, clicked, or focused.
-* **The Fix:** Full state coverage:
-  - `:hover`: subtle surface shift (`hover:bg-neutral-100 dark:hover:bg-neutral-800`).
-  - `:active` (press): tactile micro-compression (`active:scale-[0.98] transition-transform duration-100`).
-  - `:focus-visible`: clear outline ring (`focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2`).
-  - `:disabled`: clear disabled styling with `cursor-not-allowed opacity-50`.
-
-### 9. Sluggish or Janky Motion
-* **The Sin:** Transitions set to `transition: all 500ms ease-in`, animating `width`, `height`, `left`, or `top`, resulting in laggy repaints and sluggish UI responses.
-* **The Fix:**
-  - Fast durations: $100\text{ms}$–$150\text{ms}$ for micro-interactions, $200\text{ms}$ max for modals.
-  - Compositor properties only: `transform`, `opacity`.
-  - Snappy ease-out: `cubic-bezier(0.16, 1, 0.3, 1)` or fast ease-out. Never `ease-in` for entering elements.
-
-### 10. Viewport & Mobile Amputation
-* **The Sin:** Using `h-screen` or `min-h-screen` on mobile web apps (causing the bottom layout to be cut off by mobile address bars) and ignoring mobile safe areas.
-* **The Fix:** Use `min-h-dvh` or `h-dvh` (dynamic viewport height) and add safe-area padding for fixed floating navigation:
-  ```html
-  <div class="min-h-dvh pb-[calc(env(safe-area-inset-bottom)+1rem)]">
-  ```
-
-### 11. Invisible Icon-Only Buttons
-* **The Sin:** Creating `<button><svg ...></svg></button>` without any accessible name or text.
-* **The Fix:** Always provide an explicit `aria-label` and mark SVG icons as `aria-hidden="true"`:
-  ```html
-  <button type="button" aria-label="Close dialog" class="min-h-[44px] min-w-[44px] inline-flex items-center justify-center ...">
-    <svg aria-hidden="true" class="size-5" ...></svg>
-  </button>
-  ```
-
-### 12. Layout-Jumping Numbers & Blank Spinners
-* **The Sin:** Live metrics (counters, prices, stock figures) that cause adjacent text to jitter on change because of proportional fonts, or empty screens that pop suddenly with no placeholder.
-* **The Fix:** Always use `tabular-nums` for numeric and financial figures. Use structural skeleton loaders matching the exact card dimensions during loading states.
+Setiap aturan disusun dalam format terstandarisasi:
+* **Tell:** Pola visual klise yang terdeteksi.
+* **Why:** Alasan mengapa pola tersebut terbaca sebagai "AI slop" murahan.
+* **Fix:** Solusi konkret berstandar craft tinggi yang harus diterapkan.
 
 ---
 
-## Deterministic Code Inspection Checklist
+## 1. Warna & Visual
 
-Before finalizing any frontend file, scan for these deterministic code flags:
+### 1.1 The Blue-Purple / Indigo Default
+* **Tell:** Penggunaan gradien biru-ke-ungu, warna primer indigo/violet elektrik (`#4f46e5`, `#6366f1`), skema ungu-hitam, atau pendaran radial ungu di belakang layar.
+* **Why:** Kombinasi biru/ungu/indigo adalah warna yang paling over-representatif dalam data pelatihan LLM. Menggunakannya adalah sinyal instan bahwa antarmuka tidak memiliki identitas brand mandiri dan dibuat oleh AI secara default.
+* **Fix:** **DILARANG KERAS menggunakan ungu/indigo sebagai default.** Ambil palet dari brand riil produk. Batasi palet aktif maksimal 2–3 warna inti + 1 aksen fungsional. Untuk produk profesional/mahasiswa seperti Sambilan, gunakan palet netral tegas (*Deep Ink Slate* `#0f172a`) dipadukan dengan 1 aksen bermakna (misal: *Forest Emerald* `#059669` untuk pertumbuhan & penghasilan).
 
-| Pattern to Check | Flagged Code (Slop) | Fixed Code (Craft) |
-| :--- | :--- | :--- |
-| **Viewport Height** | `h-screen` / `min-h-screen` | `h-dvh` / `min-h-dvh` |
-| **Headings Typography** | `<h1 class="text-3xl font-bold">` | `<h1 class="text-balance text-3xl font-bold tracking-tight">` |
-| **Paragraph Typography** | `<p class="...">` | `<p class="text-pretty text-neutral-600 dark:text-neutral-400">` |
-| **Metrics & Data** | `<span class="font-bold">$12,450.00</span>` | `<span class="tabular-nums font-bold tracking-tight">$12,450.00</span>` |
-| **Icon-Only Buttons** | `<button><svg></svg></button>` | `<button aria-label="Action description"><svg aria-hidden="true"></svg></button>` |
-| **Mobile Tap Target** | `<button class="p-1">` | `<button class="min-h-[44px] min-w-[44px] p-2.5 ...">` |
-| **Button Feedback** | `class="bg-blue-600 text-white"` | `class="... active:scale-[0.98] transition-all duration-150 ease-out"` |
-| **Cards Elevation** | `class="bg-white shadow-xl rounded-2xl"` | `class="bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-white/10 shadow-xs rounded-xl"` |
-| **Animated Properties** | `transition-all duration-300` | `transition-[transform,opacity] duration-150` |
-| **Reduced Motion** | (None) | `motion-reduce:transition-none motion-reduce:animate-none` |
+### 1.2 The Background Dot-Grid / Blueprint Cliché
+* **Tell:** Latar belakang diisi pola titik-titik radial (*dot grid*), kotak-kotak buku tulis (*graph paper*), garis cetak biru (*blueprint lines*), atau orbs buram.
+* **Why:** Ini adalah trik malas model AI untuk membuat halaman yang kosong terasa "teknikal" tanpa melakukan pekerjaan desain nyata. Ini adalah tekstur tanpa maksud (*texture without intent*).
+* **Fix:** **Hapus total grid dan orbs latar.** Gunakan latar belakang kanvas solid yang bersih (`bg-white` atau `bg-slate-50`). Kepercayaan diri sebuah desain lahir dari ritme *whitespace* dan tipografi, bukan hiasan tekstur stok.
+
+### 1.3 Rainbow Status Badges (Terlalu Banyak Warna)
+* **Tell:** Menggunakan warna pastel pelangi yang berbeda untuk setiap label (biru untuk magang, hijau untuk paruh waktu, ungu untuk remote, amber untuk onsite, cyan untuk hybrid).
+* **Why:** Membuat halaman terlihat seperti toko permen warna-warni tanpa hierarki visual. Mata pengguna kewalahan dan tidak tahu elemen mana yang paling penting.
+* **Fix:** **Disiplin Palet Monokromatik.** Gunakan badge netral bersahaja (`border border-slate-200 bg-slate-50 text-slate-700 dark:border-white/10 dark:bg-zinc-800 dark:text-slate-300`). Simpan aksen warna khusus hanya untuk informasi status yang kritis (misal: hijau untuk kompensasi atau merah untuk kedaluwarsa).
+
+### 1.4 Excessive Glassmorphism
+* **Tell:** Menempelkan `backdrop-blur` pada navbar, kartu, sidebar, dan dropdown sekaligus.
+* **Why:** Efek kaca memudarkan tekstur dan menaruh seluruh elemen pada lapisan buram yang sama, meratakan hierarki. Jika semua benda adalah kaca, tidak ada yang menjadi latar depan.
+* **Fix:** Perlakukan efek kaca sebagai aksen langka (maksimal 1 elemen, misal sticky navbar). Semua kontainer kartu lainnya harus berupa permukaan solid tegas (`bg-white` atau `bg-zinc-900`).
+
+---
+
+## 2. Komponen & Dekorasi
+
+### 2.1 Emojis Masquerading as UI Icons
+* **Tell:** Emoji diselipkan ke dalam badge, tombol, dan judul (`⏱️`, `💰`, `⚡`, `📍`, `⏳`, `🟢`, `🚀`, `✨`).
+* **Why:** Emoji adalah bukti paling mencolok (*loudest tell*) bahwa sebuah antarmuka digenerate oleh AI, bukan dirancang oleh desainer produk. Emoji merusak baseline teks, tampil beda di setiap OS, dan terlihat amatir.
+* **Fix:** **HAPUS TOTAL EMOJI.** Gunakan tipografi teks bersih murni (misal: `15 jam/minggu`, `Sisa 4 hari`, `Malang (Remote)`). Jika dibutuhkan indikator titik, gunakan dot CSS seragam (`<span class="size-1.5 rounded-full bg-emerald-500"></span>`).
+
+### 2.2 Pretentious Hero Pill Badge
+* **Tell:** Badge kapsul melayang tepat di atas H1 (misal: `🟢 Direktori Aktif • Khusus Mahasiswa Aktif`, `✨ Platform No. 1`).
+* **Why:** Meniru bahasa status sistem untuk melabeli hal yang bukan status. Badge ini hanya mengulang apa yang sudah dikatakan oleh judul di bawahnya.
+* **Fix:** **Hapus badge tersebut.** Biarkan H1 memimpin halaman secara lugas dan percaya diri dengan bobot tipografi yang tegas.
+
+### 2.3 Decorative Status Dot yang Berkedip
+* **Tell:** Titik hijau kecil yang berkedip/pulsing tanpa henti (`animate-ping`) di samping label yang bukan siaran langsung/rekaman nyata.
+* **Why:** Meminjam kosakata indikator *live streaming* atau *recording* untuk halaman statis. Ini adalah upaya murah menarik perhatian mata tanpa fakta di baliknya.
+* **Fix:** Jika tidak ada sesi streaming/koneksi websocket langsung, **hapus animasi pulse.** Titik penanda cukup berupa lingkaran statis solid jika memang merepresentasikan status aktif.
+
+### 2.4 Decorative Icon Clutter & Arrows on Every Button
+* **Tell:** Ikon Lucide/heroicon ditempelkan di setiap tombol, link nav, dan heading; panah `→` atau `↗` di setiap tombol aksi.
+* **Why:** Polusi ikon mengurangi daya pikat visual. Panah di setiap tombol membuat tanda arah kehilangan makna penunjuknya.
+* **Fix:** Hanya gunakan ikon jika memiliki fungsi navigasi langsung (search, close, external link). Tombol aksi cukup berupa teks padat yang jelas (misal: `"Lihat Detail"`, `"Cari Lowongan"`).
+
+### 2.5 Fabricated Stat Strips
+* **Tell:** Kotak 4 metrik statis dengan angka palsu bulat (`120+ Posisi`, `45+ Mitra`, `+12% this week`) yang ditaruh hanya agar halaman terlihat "ramai".
+* **Why:** Angka karangan adalah kebohongan antarmuka. Jika produk adalah platform baru atau prototipe, kartu angka palsu terasa hampa.
+* **Fix:** Tampilkan hanya angka riil dari database. Jika belum ada agregat data masif, ganti dengan pilar keunggulan nyata produk (misal: *"Tanpa Perantara Lamaran"*, *"Informasi Kontak Terverifikasi"*).
+
+---
+
+## 3. Checklist Audit Sebelum Finalisasi
+
+Gunakan checklist deterministik ini setiap kali selesai menyusun markup:
+
+- [ ] **Bebas Warna Ungu/Indigo:** Tidak ada `#4f46e5`, `#6366f1`, atau turunan violet/indigo tanpa alasan brand.
+- [ ] **Bebas Dot-Grid / Texture Cliché:** Latar belakang bersih solid, tidak memakai background dot/blueprint.
+- [ ] **Bebas Emoji:** Nol emoji di seluruh tombol, badge, chip, dan judul.
+- [ ] **Bebas Badge Hero Palsu:** Tidak ada pill badge mengambang di atas H1.
+- [ ] **Bebas Animasi Pulse Liar:** Tidak ada `animate-ping` pada status dot yang statis.
+- [ ] **Restriksi Ikon:** Nol ikon dekoratif yang tidak memiliki fungsi utilitas.
+- [ ] **Disiplin Palet:** Maksimal 2–3 warna inti + 1 aksen fungsional; badge berkarakter netral monokromatik.
+- [ ] **Aksesibilitas & Taktil:** Kontras $\ge 4.5:1$, tap target mobile $\ge 44\text{px}$, respon tekan `active:scale-[0.98]`.

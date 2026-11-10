@@ -90,6 +90,9 @@ Never scatter arbitrary colors. Define exact semantic roles:
 ### Step 5: Audit & Deslop
 Run the deterministic slop checklist:
 - [ ] No generic purple/indigo gradient backgrounds?
+- [ ] No fake/pretentious hero pill badges (e.g. `Direktori Aktif • Khusus...`, `Platform #1`)? Let H1 lead directly.
+- [ ] Strictly zero emojis used as UI icons, badge ornaments, or list bullets (no ⏱️, 💰, ⚡, 📍, ⏳)?
+- [ ] Strict icon restraint: zero unnecessary decorative icons (icons only when functionally required for search, close, chevron)?
 - [ ] No gray text failing 4.5:1 contrast on white or dark surfaces?
 - [ ] No cards inside cards with identical borders and paddings?
 - [ ] All icon-only buttons have an explicit `aria-label`?
