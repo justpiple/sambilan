@@ -10,6 +10,7 @@ metadata:
 
 A comprehensive, production-grade design engineering skill synthesized directly from the world's premier agent design frameworks:
 - **`ui-skills.com` / `ibelick/ui-skills`** (`baseline-ui`, `improve-ui`, `fixing-accessibility`, `fixing-motion-performance`, `create-design-md`).
+- **`nextlevelbuilder/ui-ux-pro-max-skill`** (10-Priority Decision Hierarchy, Anti-Pattern Catalog, Pro-Rules & Quality Gates).
 - **`agenticskills.io/category/design`**:
   - **Anthropic Frontend Design**: The Anti-Slop Manifesto, intentional aesthetic archetypes, context-driven 4–6 token palettes, structural wireframing.
   - **Paul Bakaus's Impeccable**: Deterministic anti-pattern heuristics, vocabulary commands (`shape`, `critique`, `audit`, `polish`, `bolder`, `quieter`, `distill`, `harden`, `typeset`).
@@ -113,6 +114,7 @@ Deep-dive into specific sub-rules when designing or refactoring:
 | **Accessibility & Ergonomics** | [`rules/04-accessibility-and-ergonomics.md`](rules/04-accessibility-and-ergonomics.md) | WCAG AA, 44px tap targets, focus rings, keyboard flows, screen readers. |
 | **Tailwind v4 & Blade Patterns** | [`rules/05-modern-tailwind-v4-blade.md`](rules/05-modern-tailwind-v4-blade.md) | Tailwind v4 `@theme`, modern CSS, reusable Blade component architecture. |
 | **Layout & Spatial Systems** | [`rules/06-layout-composition-and-spatial-systems.md`](rules/06-layout-composition-and-spatial-systems.md) | 8pt spatial grid, SaaS app shells, Bento grids, split heroes, alignment rules. |
+| **UI/UX Pro Max 10 Priorities** | [`rules/07-ui-ux-pro-max-priority-framework.md`](rules/07-ui-ux-pro-max-priority-framework.md) | 10-priority execution sequence, dual-input search, pro-rules, anti-patterns. |
 | **Project Design Template** | [`templates/DESIGN.md`](templates/DESIGN.md) | Starter file to document project design tokens, voice, and rules. |
 
 ---

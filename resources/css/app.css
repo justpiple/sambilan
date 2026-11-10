@@ -4,6 +4,50 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    /* Tipografi Utama Sambilan */
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+    /* Semantic Color Tokens: Warm Persimmon & Obsidian Craft (Anti-AI Slop) */
+    --color-canvas: #fafaf9;
+    --color-surface: #ffffff;
+    --color-surface-hover: #f5f5f4;
+    --color-border-subtle: #e7e5e4;
+
+    /* Brand Primary (Warm Persimmon & Obsidian Anchor) */
+    --color-brand: #c2410c;
+    --color-brand-vibrant: #ea580c;
+    --color-brand-tint: #fff7ed;
+    --color-ink: #0f172a;
+
+    /* Earning / Financial Compensation (Forest Emerald) */
+    --color-earning: #047857;
+    --color-earning-tint: #ecfdf5;
+
+    /* Radii Scale */
+    --radius-xs: 4px;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 20px;
+}
+
+/* Base Accessibility & Touch Targets */
+@layer base {
+    html {
+        font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Support Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+        *, ::before, ::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
 }
