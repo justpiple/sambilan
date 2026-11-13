@@ -5,11 +5,12 @@ use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\LowonganController;
 use App\Http\Controllers\Admin\PerusahaanController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\KatalogController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [KatalogController::class, 'index'])->name('katalog.index');
+Route::get('/lowongan', [KatalogController::class, 'index'])->name('lowongan.index');
+Route::get('/katalog', [KatalogController::class, 'index']);
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

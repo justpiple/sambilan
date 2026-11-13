@@ -14,7 +14,7 @@
         </p>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <a href="{{ url('/') }}" class="w-full sm:w-auto inline-flex items-center justify-center min-h-[44px] px-6 py-2.5 text-sm font-semibold text-white bg-orange-700 hover:bg-orange-800 rounded-lg transition-colors active:scale-[0.98] shadow-sm">
+            <a href="#katalog" class="w-full sm:w-auto inline-flex items-center justify-center min-h-[44px] px-6 py-2.5 text-sm font-semibold text-white bg-orange-700 hover:bg-orange-800 rounded-lg transition-colors active:scale-[0.98] shadow-sm">
                 Jelajahi Lowongan
             </a>
             <a href="#panduan" class="w-full sm:w-auto inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 text-sm font-semibold text-slate-800 bg-white hover:bg-stone-100 rounded-lg transition-colors border border-stone-200 active:scale-[0.98]">
@@ -60,6 +60,11 @@
                 Tautan pendaftaran eksternal dan kontak rekruter resmi yang dapat diakses langsung oleh mahasiswa tanpa perantara rumit.
             </p>
         </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section class="pt-6">
+        @include('katalog.partials.catalog-grid')
     </section>
 </div>
 @endsection
