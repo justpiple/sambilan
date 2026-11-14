@@ -18,7 +18,7 @@
     @endif
     @stack('styles')
 </head>
-<body class="min-h-full flex flex-col bg-stone-50 text-slate-900 font-sans antialiased selection:bg-orange-100 selection:text-orange-900">
+<body class="min-h-full flex flex-col bg-stone-50 text-slate-900 font-sans antialiased selection:bg-orange-100 selection:text-orange-900 overflow-x-hidden min-w-0">
     <!-- Header / Navbar -->
     <header class="sticky top-0 z-40 w-full border-b border-stone-200/80 bg-white/95 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -148,18 +148,18 @@
                     <h2 class="text-xs font-semibold text-stone-900 tracking-wider uppercase mb-3">
                         Navigasi Mahasiswa
                     </h2>
-                    <ul class="space-y-2 text-sm">
+                    <ul class="space-y-1 text-sm">
                         <li>
-                            <a href="{{ url('/') }}" class="text-stone-600 hover:text-orange-700 transition-colors">Katalog Semua Posisi</a>
+                            <a href="{{ url('/') }}" class="inline-flex items-center min-h-[44px] py-1 text-stone-600 hover:text-orange-700 transition-colors">Katalog Semua Posisi</a>
                         </li>
                         <li>
-                            <a href="{{ url('/?tipe=magang') }}" class="text-stone-600 hover:text-orange-700 transition-colors">Lowongan Magang</a>
+                            <a href="{{ url('/?tipe=magang') }}" class="inline-flex items-center min-h-[44px] py-1 text-stone-600 hover:text-orange-700 transition-colors">Lowongan Magang</a>
                         </li>
                         <li>
-                            <a href="{{ url('/?tipe=paruh_waktu') }}" class="text-stone-600 hover:text-orange-700 transition-colors">Kerja Paruh Waktu</a>
+                            <a href="{{ url('/?tipe=paruh_waktu') }}" class="inline-flex items-center min-h-[44px] py-1 text-stone-600 hover:text-orange-700 transition-colors">Kerja Paruh Waktu</a>
                         </li>
                         <li>
-                            <a href="{{ url('/#panduan') }}" class="text-stone-600 hover:text-orange-700 transition-colors">Panduan dan Tata Cara Melamar</a>
+                            <a href="{{ url('/#panduan') }}" class="inline-flex items-center min-h-[44px] py-1 text-stone-600 hover:text-orange-700 transition-colors">Panduan dan Tata Cara Melamar</a>
                         </li>
                     </ul>
                 </div>
@@ -173,7 +173,7 @@
                         Proyek Akhir Pemrograman Aplikasi Web (PAW-B). Dikembangkan oleh Kelompok 8: Beni (Kusindra Aji) & Wara (Rouf Daniswara).
                     </p>
                     <div>
-                        <a href="{{ url('/login') }}" class="text-xs font-medium text-stone-500 hover:text-slate-800 underline underline-offset-4 transition-colors">
+                        <a href="{{ url('/login') }}" class="inline-flex items-center min-h-[44px] py-1 text-xs font-medium text-stone-600 hover:text-slate-900 underline underline-offset-4 transition-colors">
                             Portal Masuk Pengelola
                         </a>
                     </div>
@@ -182,7 +182,7 @@
 
             <div class="mt-8 pt-8 border-t border-stone-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
                 <p>&copy; {{ date('Y') }} Sambilan. Hak Cipta Terpelihara.</p>
-                <p class="font-mono text-[11px] text-stone-400">PAW-B &bull; Warm Persimmon &amp; Obsidian Craft</p>
+                <p class="font-mono text-[11px] text-stone-500">PAW-B &bull; Warm Persimmon &amp; Obsidian Craft</p>
             </div>
         </div>
     </footer>
