@@ -70,4 +70,26 @@ class KatalogController extends Controller
             'hasActiveFilters' => $hasActiveFilters,
         ]);
     }
+
+    public function show(Lowongan $lowongan): View
+    {
+        $lowongan->load(['perusahaan', 'kategori']);
+
+        $isAktif = $lowongan->isAktif();
+
+        $relatedJobs = Lowongan::query()
+            ->aktif()
+            ->where('id', '!=', $lowongan->id)
+            ->where('kategori_id', $lowongan->kategori_id)
+            ->with(['perusahaan', 'kategori'])
+            ->latest('id')
+            ->take(3)
+            ->get();
+
+        return view('katalog.show', [
+            'lowongan' => $lowongan,
+            'isAktif' => $isAktif,
+            'relatedJobs' => $relatedJobs,
+        ]);
+    }
 }

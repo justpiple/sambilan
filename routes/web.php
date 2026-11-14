@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [KatalogController::class, 'index'])->name('katalog.index');
 Route::get('/lowongan', [KatalogController::class, 'index'])->name('lowongan.index');
 Route::get('/katalog', [KatalogController::class, 'index']);
+Route::get('/lowongan/{lowongan}', [KatalogController::class, 'show'])->name('lowongan.show');
+Route::get('/katalog/{lowongan}', [KatalogController::class, 'show'])->name('katalog.show');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
