@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use App\Models\Lowongan;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Schema;
@@ -16,14 +17,27 @@ class KatalogController extends Controller
         $hasLowongansTable = Schema::hasTable('lowongans');
         $hasKategorisTable = Schema::hasTable('kategoris');
 
-        $lowongans = $hasLowongansTable
-            ? Lowongan::query()
+        if ($hasLowongansTable) {
+            $query = Lowongan::query()
                 ->aktif()
-                ->with(['perusahaan', 'kategori'])
-                ->latest('id')
+                ->with(['perusahaan', 'kategori']);
+
+            if ($request->filled('q')) {
+                $search = trim((string) $request->input('q'));
+                $query->where(function (Builder $builder) use ($search) {
+                    $builder->where('judul', 'like', "%{$search}%")
+                        ->orWhereHas('perusahaan', function (Builder $companyQuery) use ($search) {
+                            $companyQuery->where('nama', 'like', "%{$search}%");
+                        });
+                });
+            }
+
+            $lowongans = $query->latest('id')
                 ->paginate(9)
-                ->withQueryString()
-            : new LengthAwarePaginator([], 0, 9);
+                ->withQueryString();
+        } else {
+            $lowongans = new LengthAwarePaginator([], 0, 9);
+        }
 
         $kategoris = $hasKategorisTable
             ? Kategori::orderBy('nama', 'asc')->get()
@@ -36,6 +50,7 @@ class KatalogController extends Controller
         return view($viewName, [
             'lowongans' => $lowongans,
             'kategoris' => $kategoris,
+            'search' => $request->input('q', ''),
         ]);
     }
 }
