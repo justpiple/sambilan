@@ -152,7 +152,7 @@
 
                         @if (request('q'))
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-orange-50 text-orange-900 border border-orange-200 font-medium">
-                                <span>Kata Kunci: "{{ request('q') }}"</span>
+                                <span>Kata Kunci: &quot;{{ request('q') }}&quot;</span>
                                 <a href="{{ request()->fullUrlWithQuery(['q' => null, 'page' => null]) }}" class="inline-flex items-center justify-center p-1 rounded hover:text-orange-950 focus:outline-none" aria-label="Hapus filter pencarian">
                                     <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                                 </a>
