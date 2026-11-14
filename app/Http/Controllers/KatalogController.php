@@ -32,6 +32,18 @@ class KatalogController extends Controller
                 });
             }
 
+            if ($request->filled('kategori_id') && is_numeric($request->input('kategori_id'))) {
+                $query->where('kategori_id', (int) $request->input('kategori_id'));
+            }
+
+            if ($request->filled('tipe') && in_array($request->input('tipe'), ['magang', 'paruh_waktu'], true)) {
+                $query->where('tipe', $request->input('tipe'));
+            }
+
+            if ($request->filled('sistem_kerja') && in_array($request->input('sistem_kerja'), ['onsite', 'remote', 'hybrid'], true)) {
+                $query->where('sistem_kerja', $request->input('sistem_kerja'));
+            }
+
             $lowongans = $query->latest('id')
                 ->paginate(9)
                 ->withQueryString();
@@ -43,6 +55,11 @@ class KatalogController extends Controller
             ? Kategori::orderBy('nama', 'asc')->get()
             : collect();
 
+        $hasActiveFilters = $request->filled('q')
+            || $request->filled('kategori_id')
+            || $request->filled('tipe')
+            || $request->filled('sistem_kerja');
+
         $viewName = ($request->is('lowongan*') || $request->is('katalog*'))
             ? 'katalog.index'
             : 'welcome';
@@ -50,7 +67,7 @@ class KatalogController extends Controller
         return view($viewName, [
             'lowongans' => $lowongans,
             'kategoris' => $kategoris,
-            'search' => $request->input('q', ''),
+            'hasActiveFilters' => $hasActiveFilters,
         ]);
     }
 }
