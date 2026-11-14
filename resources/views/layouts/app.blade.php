@@ -106,7 +106,7 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-stone-200/80 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Col 1: Brand Info -->
                 <div class="space-y-3">
                     <div class="flex items-center gap-2">
@@ -146,6 +146,16 @@
                     <a href="{{ url('/login') }}" class="inline-flex items-center min-h-[44px] py-1 text-xs font-medium text-stone-600 hover:text-slate-900 underline underline-offset-4 transition-colors">
                         Masuk Pengelola
                     </a>
+                </div>
+
+                <!-- Col 4: Info Loker -->
+                <div>
+                    <h2 class="text-xs font-semibold text-stone-900 tracking-wider uppercase mb-3">
+                        Informasi
+                    </h2>
+                    <p class="text-sm text-stone-600">
+                        Pasang info loker: <a href="mailto:contact@sambilan.id" class="text-orange-600 hover:text-orange-700 underline underline-offset-4 transition-colors">contact@sambilan.id</a>
+                    </p>
                 </div>
             </div>
 
