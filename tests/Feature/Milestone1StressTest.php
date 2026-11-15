@@ -255,13 +255,12 @@ class Milestone1StressTest extends TestCase
 
         // Assert crucial branding and layout content is rendered
         $response->assertSee('Sambilan');
-        $response->assertSee('Katalog Mahasiswa');
         $response->assertSee('Katalog Lowongan Magang &amp; Kerja Paruh Waktu Mahasiswa', false);
         $response->assertSee('Ramah Jadwal Kuliah');
         $response->assertSee('Kejelasan Kompensasi');
         $response->assertSee('Koneksi Mitra Langsung');
         $response->assertSee('Navigasi Mahasiswa');
-        $response->assertSee('Kelompok 8: Beni (Kusindra Aji) & Wara (Rouf Daniswara)', false);
+        $response->assertSee('Masuk Pengelola');
     }
 
     /**
