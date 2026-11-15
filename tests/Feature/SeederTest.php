@@ -6,6 +6,7 @@ use App\Models\Kategori;
 use App\Models\Lowongan;
 use App\Models\Perusahaan;
 use App\Models\User;
+use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\DatabaseSeeder;
 use Database\Seeders\KategoriSeeder;
 use Database\Seeders\PerusahaanSeeder;
@@ -33,6 +34,20 @@ class SeederTest extends TestCase
         $this->assertGreaterThanOrEqual(5, Kategori::count());
         $this->assertGreaterThanOrEqual(6, Perusahaan::count());
         $this->assertGreaterThanOrEqual(14, Lowongan::count());
+    }
+
+    public function test_admin_user_seeder_creates_admin_user(): void
+    {
+        $this->seed(AdminUserSeeder::class);
+
+        $this->assertDatabaseHas('users', [
+            'email' => 'admin@sambilan.id',
+            'role' => 'admin',
+        ]);
+
+        $admin = User::where('email', 'admin@sambilan.id')->first();
+        $this->assertNotNull($admin);
+        $this->assertTrue(Hash::check('password', $admin->password));
     }
 
     public function test_kategori_seeder_populates_expected_domains(): void
