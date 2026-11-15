@@ -166,4 +166,20 @@ class PerusahaanCrudTest extends TestCase
         $response->assertSessionHas('error', 'Perusahaan tidak dapat dihapus karena masih memiliki data lowongan terkait.');
         $this->assertDatabaseHas('perusahaans', ['id' => $perusahaan->id]);
     }
+
+    public function test_perusahaan_listing_has_shortcut_to_create_lowongan_with_autoselected_perusahaan(): void
+    {
+        $perusahaan = Perusahaan::create([
+            'nama' => 'PT Karya Cipta',
+            'email' => 'karir@karyacipta.id',
+        ]);
+
+        $response = $this->actingAs($this->admin)->get(route('admin.perusahaans.index'));
+        $response->assertStatus(200);
+        $response->assertSee(route('admin.lowongans.create', ['perusahaan_id' => $perusahaan->id]));
+
+        $createResponse = $this->actingAs($this->admin)->get(route('admin.lowongans.create', ['perusahaan_id' => $perusahaan->id]));
+        $createResponse->assertStatus(200);
+        $createResponse->assertSee('value="'.$perusahaan->id.'" selected', false);
+    }
 }

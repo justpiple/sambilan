@@ -29,7 +29,7 @@
                         <th scope="col" class="py-3.5 px-4">Email Resmi</th>
                         <th scope="col" class="py-3.5 px-4">Media Sosial / Web</th>
                         <th scope="col" class="py-3.5 px-4 text-center">Jumlah Lowongan</th>
-                        <th scope="col" class="py-3.5 px-4 text-right">Aksi</th>
+                        <th scope="col" class="py-3.5 px-4 text-right whitespace-nowrap">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-stone-100 text-sm">
@@ -63,15 +63,18 @@
                                     {{ $perusahaan->lowongans_count }} lowongan
                                 </span>
                             </td>
-                            <td class="py-3.5 px-4 text-right">
-                                <div class="inline-flex items-center gap-2">
-                                    <a href="{{ route('admin.perusahaans.edit', $perusahaan) }}" class="inline-flex items-center justify-center min-h-[44px] px-3 py-1.5 text-xs font-medium text-slate-700 bg-stone-100 hover:bg-stone-200 rounded-lg transition-colors active:scale-[0.98]">
+                            <td class="py-3.5 px-4 text-right whitespace-nowrap">
+                                <div class="inline-flex items-center gap-2 whitespace-nowrap">
+                                    <a href="{{ route('admin.lowongans.create', ['perusahaan_id' => $perusahaan->id]) }}" class="inline-flex items-center justify-center min-h-[44px] px-3 py-1.5 text-xs font-semibold text-orange-700 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors border border-orange-200 active:scale-[0.98] whitespace-nowrap shrink-0">
+                                        + Lowongan
+                                    </a>
+                                    <a href="{{ route('admin.perusahaans.edit', $perusahaan) }}" class="inline-flex items-center justify-center min-h-[44px] px-3 py-1.5 text-xs font-medium text-slate-700 bg-stone-100 hover:bg-stone-200 rounded-lg transition-colors active:scale-[0.98] whitespace-nowrap shrink-0">
                                         Edit
                                     </a>
                                     <form action="{{ route('admin.perusahaans.destroy', $perusahaan) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus perusahaan ini?');" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="inline-flex items-center justify-center min-h-[44px] px-3 py-1.5 text-xs font-medium text-red-700 bg-red-50 hover:bg-red-100 rounded-lg transition-colors active:scale-[0.98]">
+                                        <button type="submit" class="inline-flex items-center justify-center min-h-[44px] px-3 py-1.5 text-xs font-medium text-red-700 bg-red-50 hover:bg-red-100 rounded-lg transition-colors active:scale-[0.98] whitespace-nowrap shrink-0">
                                             Hapus
                                         </button>
                                     </form>

@@ -33,7 +33,7 @@
                         <select id="perusahaan_id" name="perusahaan_id" required class="w-full min-h-[44px] px-3 text-sm rounded-lg border border-stone-300 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent bg-white @error('perusahaan_id') border-rose-400 @enderror">
                             <option value="">-- Pilih Perusahaan --</option>
                             @foreach ($perusahaans as $p)
-                                <option value="{{ $p->id }}" {{ old('perusahaan_id') == $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
+                                <option value="{{ $p->id }}" {{ (string) old('perusahaan_id', request('perusahaan_id')) === (string) $p->id ? 'selected' : '' }}>{{ $p->nama }}</option>
                             @endforeach
                         </select>
                         @error('perusahaan_id') <p class="text-xs text-rose-600 mt-1">{{ $message }}</p> @enderror
