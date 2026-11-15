@@ -29,7 +29,7 @@
         </a>
     </div>
 
-    <!-- Expired Job Alert (BR-01 Enforcement) -->
+    <!-- Expired Job Alert -->
     @if (!$isAktif)
         <div class="rounded-xl border border-amber-200 bg-amber-50/80 p-4 sm:p-5 flex items-start gap-3 shadow-xs break-words" role="alert">
             <div class="p-2 rounded-lg bg-amber-100 text-amber-800 shrink-0 mt-0.5">

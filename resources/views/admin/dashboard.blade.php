@@ -87,7 +87,7 @@
                         Total Kategori
                     </p>
                     <p class="mt-0.5 text-xs text-stone-500">
-                        Taksonomi peminatan karier mahasiswa
+                        Bidang peminatan karier mahasiswa
                     </p>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                     href="{{ Route::has('admin.kategoris.index') ? route('admin.kategoris.index') : url('/admin/kategoris') }}"
                     class="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-700 hover:text-orange-800 transition-colors min-h-[36px]"
                 >
-                    <span>Kelola Taksonomi Kategori</span>
+                    <span>Kelola Kategori</span>
                     <span>&rarr;</span>
                 </a>
             </div>
@@ -108,7 +108,7 @@
             <div>
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                        Katalog Publik (BR-01)
+                        Katalog Publik
                     </span>
                     <span class="p-2 rounded-lg bg-emerald-50 text-emerald-700">
                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

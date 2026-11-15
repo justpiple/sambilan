@@ -115,7 +115,7 @@
             </div>
 
             <div class="space-y-4">
-                <h2 class="text-sm font-semibold uppercase tracking-wider text-stone-500 border-b border-stone-200 pb-2">Pendaftaran & Aturan Bisnis (BR-02)</h2>
+                <h2 class="text-sm font-semibold uppercase tracking-wider text-stone-500 border-b border-stone-200 pb-2">Informasi Pendaftaran</h2>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
@@ -131,9 +131,8 @@
                     </div>
 
                     <div>
-                        <label for="tenggat" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Batas Tenggat Pendaftaran (BR-02) <span class="text-rose-600">*</span></label>
+                        <label for="tenggat" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">Batas Tenggat Pendaftaran <span class="text-rose-600">*</span></label>
                         <input type="date" id="tenggat" name="tenggat" value="{{ old('tenggat', date('Y-m-d', strtotime('+14 days'))) }}" min="{{ date('Y-m-d') }}" required class="w-full min-h-[44px] px-3.5 text-sm font-mono rounded-lg border border-stone-300 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent @error('tenggat') border-rose-400 @enderror">
-                        <span class="text-[11px] text-stone-500 mt-1 block">BR-02: Sistem menolak batas tanggal di masa lalu.</span>
                         @error('tenggat') <p class="text-xs text-rose-600 mt-1">{{ $message }}</p> @enderror
                     </div>
 

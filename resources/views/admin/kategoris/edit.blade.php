@@ -7,7 +7,7 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-2xl font-bold tracking-tight text-slate-900">Edit Kategori</h1>
-            <p class="text-sm text-stone-600 mt-1">Perbarui informasi taksonomi bidang lowongan.</p>
+            <p class="text-sm text-stone-600 mt-1">Perbarui nama dan deskripsi kategori lowongan.</p>
         </div>
         <a href="{{ route('admin.kategoris.index') }}" class="inline-flex items-center justify-center min-h-[44px] px-3.5 py-2 text-sm font-medium text-stone-600 hover:text-slate-900 hover:bg-stone-100 rounded-lg transition-colors">
             Kembali

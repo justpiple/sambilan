@@ -43,9 +43,6 @@
                 <span class="text-xl font-bold tracking-tight text-white group-hover:text-orange-400 transition-colors">
                     Sambilan<span class="text-orange-500">.</span>
                 </span>
-                <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                    Back-Office
-                </span>
             </a>
         </div>
 
@@ -137,8 +134,7 @@
         </div>
 
         <footer class="bg-white border-t border-stone-200 px-4 sm:px-8 py-4 text-xs text-stone-500 flex flex-col sm:flex-row items-center justify-between gap-2 mt-auto">
-            <span>&copy; {{ date('Y') }} Sambilan &bull; Administrator Back-Office</span>
-            <span class="font-mono text-[11px] text-stone-400">PAW-B Kelompok 8 &bull; Obsidian Craft</span>
+            <span>&copy; {{ date('Y') }} Sambilan &bull; Administrator Panel</span>
         </footer>
     </main>
 
